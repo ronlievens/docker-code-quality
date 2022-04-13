@@ -45,33 +45,50 @@ Als is de installatie is afgerond, ga dan naar de [Update Center](http://127.0.0
 1. Vink het vakje onder "Default Language" aan ("Ignore browser preference and force this language to all users")
 
 
-## Stel de bouw agents in
+## Stel standaard bouw node in
 1. Login Jenkins
-1. Ga naar "Beheer Jenkins->Configureer System"
-1. Vul voor "# of executors" de waarde 1 in (de rest gaat via de nodes)
+1. Ga naar "Manage Jenkins->Manage Nodes and Clouds"
+1. Klik op "Built-In Node" en daarna klik op "Configure"
+1. Voor "Number of executors" vul de waarde "0" in
+1. Voor "Usage" vul de waarde "Only build jobs with label expressions matching this node" in
 1. Klik op "Save"
-1. Goto "Manage Jenkins->Manage Nodes and Clouds"
-1. Click on "New Node"
-1. For "Node name" set the value "jenkins-agent-one"
-1. Select "Permanent Agent"
-1. Click "OK"
-1. For "Remote root directory" set the value "/home/jenkins/agent".
-1. Click "OK"
 
-## Get node secret
-1. Login Jenkins as admin
-1. Goto "Manage Jenkins->Manage Nodes and Clouds"
-1. Click on "jenkins-agent-one"
-1. Copy the value after "-secret"
-1. Past the value in the new file "./secrets/jenkins-agent-one.txt"
 
-# Install Global tools
+## Stel de eerste bouw agent in
+1. Login Jenkins
+1. Ga naar "Manage Jenkins->Manage Nodes and Clouds"
+1. Klik op "New Node"
+1. Voor "Node name" vul de waarde "jenkins-agent-one" in
+1. Selecteer "Permanent Agent"
+1. Klik op "Create"
+1. Voor "Number of executors" vul de waarde "3" in
+1. Voor "Remote root directory" vul de waarde "/home/jenkins/agent" in
+1. Click "Save"
 
-## JDK
 
-Lookup the download link here: https://adoptopenjdk.net/releases.html
+## Stel de tweede bouw agent in
+1. Login Jenkins
+1. Ga naar "Manage Jenkins->Manage Nodes and Clouds"
+1. Klik op "New Node"
+1. Voor "Node name" vul de waarde "jenkins-agent-two" in
+1. Selecteer "Permanent Agent"
+1. Klik op "Create"
+1. Voor "Number of executors" vul de waarde "3" in
+1. Voor "Remote root directory" vul de waarde "/home/jenkins/agent" in
+1. Click "Save"
 
-1. Click "Manage Jenkins" > "Global Tool Configuration" > "Add JDK" (near JDK installations)
-1. Delete the java.sun.com installer. Just click "Add Installer" below and choose "Extract .zip/.tar.gz"
-1. Download URL: copy from link above
-1. "Save" the configuration
+
+## Stel node secret voor de eerste bouw agent in
+1. Login Jenkins
+1. Ga naar "Beheer Jenkins->Manage Nodes and Clouds"
+1. Klik op "jenkins-agent-one"
+1. Kopieer de waarde achter "-secret"
+1. Plak deze waarde in het bestand "data/jenkins/agents/secrets/jenkins-agent-one.txt"  (Het kan zijn dat docker een folder met dezelfde naam aanmaakt, verwijder die en creeer een nieuw text bestand)
+
+
+## Stel node secret voor de tweede bouw agent in
+1. Login Jenkins
+1. Ga naar "Beheer Jenkins->Manage Nodes and Clouds"
+1. Klik op "jenkins-agent-one"
+1. Kopieer de waarde achter "-secret"
+1. Plak deze waarde in het bestand "data/jenkins/agents/secrets/jenkins-agent-two.txt"  (Het kan zijn dat docker een folder met dezelfde naam aanmaakt, verwijder die en creeer een nieuw text bestand)
